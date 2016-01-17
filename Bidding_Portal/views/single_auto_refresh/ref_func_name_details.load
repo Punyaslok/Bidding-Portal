@@ -1,0 +1,1 @@
+{{name = db(db.auth_user.id==retval.current_highest_bidder).select()}}{{name2=name[0]}}{{=name2.first_name}} {{=name2.last_name}} ({{=name2.email}})

@@ -1,0 +1,4 @@
+{{extend 'layout2.html'}}
+<p>
+{{=form}}
+</p>

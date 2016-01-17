@@ -1,0 +1,17 @@
+# -*- coding: utf-8 -*-
+
+
+db.define_table('product_list',
+                Field('product_name',requires=IS_NOT_EMPTY()),
+                Field('description','text',requires=IS_NOT_EMPTY()),
+                Field('date_of_purchase','datetime'),
+                Field('starting_price','double',requires=IS_NOT_EMPTY()),
+                Field('end_date_time','datetime',requires=IS_NOT_EMPTY()),
+                Field('image_no_1', 'upload'),
+                Field('image_no_2', 'upload'),
+                Field('image_no_3', 'upload'),
+                Field('image_no_4', 'upload'),
+                Field('image_no_5', 'upload'),
+                Field('picture_file', 'blob'),
+                auth.signature
+                )

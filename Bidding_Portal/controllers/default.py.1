@@ -1,0 +1,155 @@
+# -*- coding: utf-8 -*-
+# this file is released under public domain and you can use without limitations
+
+#########################################################################
+## This is a sample controller
+## - index is the default action of any application
+## - user is required for authentication and authorization
+## - download is for downloading files uploaded in the db (does streaming)
+## - api is an example of Hypermedia API support and access control
+#########################################################################
+
+def template():
+    return locals()
+def template2():
+    return locals()
+
+
+
+@auth.requires_login()
+def index():
+    response.flash = T("Welcome to web2py!")
+    return dict(message=T('Hello World'))
+
+@auth.requires_login()
+def sell():
+    db.product_list.Devices_Subcategory.show_if = (db.product_list.category=='Devices')
+    db.product_list.Mobile_Phones_Subcategory.show_if = (db.product_list.category=='Devices' and db.product_list.Devices_Subcategory=='Mobile Phones')   #How on earth is this working with an or condition but not with an and condition
+    db.product_list.Computers_Subcategory.show_if = (db.product_list.category=='Devices' and db.product_list.Devices_Subcategory=='Computers')   #How on earth is this working with an or condition but not with an and condition
+    form = SQLFORM(db.product_list).process()
+    if form.accepted:
+        session.flash = 'Successfully posted product'
+        redirect(URL('myuploadeditems'))
+    elif form.errors:
+        response.flash = 'Form has errors.'
+    else:
+        response.flash = 'As easy as that !!!'
+    return locals()
+
+@auth.requires_login()
+def viewposteditems():
+    form = SQLFORM(db.product_list).process()
+    return locals()
+
+
+
+def manage():
+    grid = SQLFORM.grid(db.product_list)
+    return locals()
+
+def myuploadeditems():
+    rows = db(db.product_list.created_by==auth.user).select()
+    return locals()
+
+def productpage():
+    arguments = request.args[0]
+    product = db(db.product_list.id==request.args[0]).select()
+    firstproduct=product[0]
+    form2 = SQLFORM.factory(
+        Field('bid_value','integer',requires=IS_NOT_EMPTY())
+    )
+    if form2.process().accepted:
+        ret=form2.vars.bid_value
+        if firstproduct.current_highest_bidder != 'none' :
+            if int(ret) > int(firstproduct.current_highest_bid) :
+                db(db.product_list.id==request.args[0]).validate_and_update(current_highest_bid=ret)
+                ret2=auth.user.id
+                db(db.product_list.id==request.args[0]).validate_and_update(current_highest_bidder=ret2)
+                redirect(URL('default/productpage',arguments))
+            else :
+                response.flash = 'Bid amount must be greater than the highest bid.'
+        else:
+            if int(ret) > int(firstproduct.starting_price) :
+                db(db.product_list.id==request.args[0]).validate_and_update(current_highest_bid=ret)
+                ret2=auth.user.id
+                db(db.product_list.id==request.args[0]).validate_and_update(current_highest_bidder=ret2)
+                redirect(URL('default/productpage',arguments))
+            else :
+                response.flash = 'Bid amount must be greater than the starting price.'
+    return locals()
+
+def index2():
+    arguments = request.args[0]
+    product = db(db.product_list.id==request.args[0]).select()
+    firstproduct=product[0]
+    form2 = SQLFORM.factory(
+        Field('bid_value','integer',requires=IS_NOT_EMPTY())
+    )
+    if form2.process().accepted:
+        ret=form2.vars.bid_value
+        if firstproduct.current_highest_bidder != 'none' :
+            if int(ret) > int(firstproduct.current_highest_bid) :
+                db(db.product_list.id==request.args[0]).validate_and_update(current_highest_bid=ret)
+                ret2=auth.user.id
+                db(db.product_list.id==request.args[0]).validate_and_update(current_highest_bidder=ret2)
+                redirect(URL('default/productpage',arguments))
+            else :
+                response.flash = 'Bid amount must be greater than the highest bid.'
+        else:
+            if int(ret) > int(firstproduct.starting_price) :
+                db(db.product_list.id==request.args[0]).validate_and_update(current_highest_bid=ret)
+                ret2=auth.user.id
+                db(db.product_list.id==request.args[0]).validate_and_update(current_highest_bidder=ret2)
+                redirect(URL('default/productpage',arguments))
+            else :
+                response.flash = 'Bid amount must be greater than the starting price.'
+    return locals()
+
+def user():
+    """
+    exposes:
+    http://..../[app]/default/user/login
+    http://..../[app]/default/user/logout
+    http://..../[app]/default/user/register
+    http://..../[app]/default/user/profile
+    http://..../[app]/default/user/retrieve_password
+    http://..../[app]/default/user/change_password
+    http://..../[app]/default/user/manage_users (requires membership in
+    use @auth.requires_login()
+        @auth.requires_membership('group name')
+        @auth.requires_permission('read','table name',record_id)
+    to decorate functions that need access control
+    """
+    return dict(form=auth())
+
+
+@cache.action()
+def download():
+    """
+    allows downloading of uploaded files
+    http://..../[app]/default/download/[filename]
+    """
+    return response.download(request, db)
+
+
+def call():
+    """
+    exposes services. for example:
+    http://..../[app]/default/call/jsonrpc
+    decorate with @services.jsonrpc the functions to expose
+    supports xml, json, xmlrpc, jsonrpc, amfrpc, rss, csv
+    """
+    return service()
+
+
+@auth.requires_login() 
+def api():
+    """
+    this is example of API with access control
+    WEB2PY provides Hypermedia API (Collection+JSON) Experimental
+    """
+    from gluon.contrib.hypermedia import Collection
+    rules = {
+        '<tablename>': {'GET':{},'POST':{},'PUT':{},'DELETE':{}},
+        }
+    return Collection(db).process(request,response,rules)

@@ -1,0 +1,94 @@
+{{extend 'layout2.html'}}
+
+{{import datetime}}
+{{n = 0}}
+<table class="query_table">
+    {{for row in rows : }}
+    {{ if n%3==0:}}
+<tr>
+{{pass}}
+{{n=n+1}}
+<td >
+    <a href="{{=URL('productpage',args=row.id)}}">
+	<table class="cell">
+		<tr>
+            {{if len(row.image_no_1)==0 and len(row.image_no_2)==0 and len(row.image_no_3)==0 and len(row.image_no_4)==0 and len(row.image_no_5)==0:}}
+        <td class="query_td"><img class="tableimg" src="{{=URL('static/images','No_image_available.jpg')}}" /></td>
+    
+            {{else:}}
+			<td class="query_td"><img class="tableimg" src="{{=URL('download',args=row.image_no_1)}}"/></td>
+            {{pass}}
+		</tr>
+		<tr>
+			<td class="query_td"><h3>{{=row.product_name}}</h3></td>
+		</tr>
+		<tr>
+			<td class="query_td">
+				<h5>
+                    
+                Starting Price: ₹ {{=row.starting_price}}</h5>
+			</td>
+		</tr>
+		<tr>
+			<td class="query_td"><h5>
+                {{ if row.current_highest_bid > -1: }}
+                    Highest Bid: ₹ {{=row.current_highest_bid}}</h5>
+                {{else:}}
+                    No bids yet.
+                {{pass}}
+			</td>
+		</tr>
+		<tr>
+			<td class="query_td">
+				<script>
+var end{{=row.id}} = new Date('{{=row.end_date_time.strftime('%m/%d/%Y %H:%M')}}');
+
+    var _second{{=row.id}} = 1000;
+    var _minute{{=row.id}} = _second{{=row.id}} * 60;
+    var _hour{{=row.id}} = _minute{{=row.id}} * 60;
+    var _day{{=row.id}} = _hour{{=row.id}} * 24;
+    var timer{{=row.id}};
+
+    function showRemaining{{=row.id}}() {
+        var now{{=row.id}} = new Date();
+        var distance{{=row.id}} = end{{=row.id}} - now{{=row.id}};
+        if (distance{{=row.id}} < 0) {
+
+            clearInterval(timer{{=row.id}});
+            document.getElementById('countdown{{=row.id}}').innerHTML = 'EXPIRED!';
+
+            return;
+        }
+        var days{{=row.id}} = Math.floor(distance{{=row.id}} / _day{{=row.id}});
+        var hours{{=row.id}} = Math.floor((distance{{=row.id}} % _day{{=row.id}}) / _hour{{=row.id}});
+        var minutes{{=row.id}} = Math.floor((distance{{=row.id}} % _hour{{=row.id}}) / _minute{{=row.id}});
+        var seconds{{=row.id}} = Math.floor((distance{{=row.id}} % _minute{{=row.id}}) / _second{{=row.id}});
+
+        document.getElementById('countdown{{=row.id}}').innerHTML = days{{=row.id}} + 'days ';
+        document.getElementById('countdown{{=row.id}}').innerHTML += hours{{=row.id}} + 'hrs ';
+        document.getElementById('countdown{{=row.id}}').innerHTML += minutes{{=row.id}} + 'mins ';
+        document.getElementById('countdown{{=row.id}}').innerHTML += seconds{{=row.id}} + 'secs';
+    }
+
+    timer{{=row.id}} = setInterval(showRemaining{{=row.id}}, 1000);
+</script>
+
+                
+                
+                
+                <div><h4>
+                    Time left : <div id="countdown{{=row.id}}" style="color: lightblue"></h4></div>
+			</td>
+		</tr>
+	</table>
+     </a>
+</td>
+
+
+{{pass}}
+{{ if n%3==0:}}
+    </tr>
+{{pass}}
+{{n=n+1}}
+</table>
+{{pass}}

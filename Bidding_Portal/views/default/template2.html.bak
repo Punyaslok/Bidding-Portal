@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>Template</title>
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" href="{{=URL('static','css/categoriesmenu/normalize.css')}}" />
+		<link rel="stylesheet" href="{{=URL('static','css/categoriesmenu/demo.css')}}" />
+		<link rel="stylesheet" href="{{=URL('static','css/categoriesmenu/icons.css')}}" />
+		<link rel="stylesheet" href="{{=URL('static','css/categoriesmenu/component.css')}}" />
+		<script src="{{=URL('static','js/categoriesmenu/modernizr.custom.js')}}"></script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <link rel="stylesheet" href="{{=URL('static','css/circular/normalize.css')}}"/>
+ <!--       <link rel="stylesheet" href="{{=URL('static','css/circular/demo.css')}}"/>-->
+        <link rel="stylesheet" href="{{=URL('static','css/circular/component2.css')}}"/>
+		<script src="{{=URL('static','js/circular/modernizr-2.6.2.min.js')}}"></script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+       
+        
+        
+        
+	</head>
+	<body>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+		<div class="category_container">
+			<!-- Push Wrapper -->
+			<div class="mp-pusher" id="mp-pusher">
+
+				<!-- mp-menu -->
+				<nav id="mp-menu" class="mp-menu">
+					<div class="mp-level">
+						<h2 class="icon icon-world">All Categories</h2>
+						<ul>
+							<li class="icon icon-arrow-left">
+								<a class="icon icon-display" href="#">Devices</a>
+								<div class="mp-level">
+									<h2 class="icon icon-display">Devices</h2>
+									<a class="mp-back" href="#">back</a>
+									<ul>
+										<li class="icon icon-arrow-left">
+											<a class="icon icon-phone" href="#">Mobile Phones</a>
+											<div class="mp-level">
+												<h2>Mobile Phones</h2>
+												<a class="mp-back" href="#">back</a>
+												<ul>
+													<li><a href="#">Super Smart Phone</a></li>
+													<li><a href="#">Thin Magic Mobile</a></li>
+													<li><a href="#">Performance Crusher</a></li>
+													<li><a href="#">Futuristic Experience</a></li>
+												</ul>
+											</div>
+										</li>
+										<li class="icon icon-arrow-left">
+											<a class="icon icon-tv" href="#">Computers</a>
+											<div class="mp-level">
+												<h2>Computers</h2>
+												<a class="mp-back" href="#">back</a>
+												<ul>
+													<li><a href="#">Laptops</a></li>
+													<li><a href="#">PCs</a></li>
+													<li><a href="#">Laptop Accessories</a></li>
+													<li><a href="#">PC Accessories</a></li>
+													<li><a href="#">View All</a></li>
+												</ul>
+											</div>
+										</li>
+										<li class="icon icon-arrow-left">
+											<a class="icon icon-camera" href="#">Cameras</a>
+											<div class="mp-level">
+												<h2>Cameras</h2>
+												<a class="mp-back" href="#">back</a>
+												<ul>
+													<li><a href="#">DSLR</a></li>
+													<li><a href="#">Power Shooter</a></li>
+													<li><a href="#">Easy Photo Maker</a></li>
+													<li><a href="#">All Cameras</a></li>
+												</ul>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="icon icon-arrow-left">
+								<a class="icon icon-news" href="#">Books</a>
+								<div class="mp-level">
+									<h2 class="icon icon-news">Books</h2>
+									<a class="mp-back" href="#">back</a>
+									<ul>
+										<li><a href="#">Fiction</a></li>
+										<li><a href="#">Science and Technology</a></li>
+										<li><a href="#">Humor</a></li>
+										<li><a href="#">Travel</a></li>
+										<li><a href="#">Reference Books</a></li>
+										<li><a href="#">All books</a></li>
+									</ul>
+								</div>
+							</li>
+							<li class="icon icon-arrow-left">
+								<a class="icon icon-shop" href="#">Store</a>
+								<div class="mp-level">
+									<h2 class="icon icon-shop">Store</h2>
+									<a class="mp-back" href="#">back</a>
+									<ul>
+										<li class="icon icon-arrow-left">
+											<a class="icon icon-t-shirt" href="#">Clothes</a>
+											<div class="mp-level">
+												<h2 class="icon icon-t-shirt">Clothes</h2>
+												<a class="mp-back" href="#">back</a>
+												<ul>
+													<li class="icon icon-arrow-left">
+														<a class="icon icon-female" href="#">Women's Clothing</a>
+														<div class="mp-level">
+															<h2 class="icon icon-female">Women's Clothing</h2>
+															<a class="mp-back" href="#">back</a>
+															<ul>
+																<li><a href="#">Tops</a></li>
+																<li><a href="#">Dresses</a></li>
+																<li><a href="#">Trousers</a></li>
+																<li><a href="#">Shoes</a></li>
+																<li><a href="#">Sale</a></li>
+															</ul>
+														</div>
+													</li>
+													<li class="icon icon-arrow-left">
+														<a class="icon icon-male" href="#">Men's Clothing</a>
+														<div class="mp-level">
+															<h2 class="icon icon-male">Men's Clothing</h2>
+															<a class="mp-back" href="#">back</a>
+															<ul>
+																<li><a href="#">Shirts</a></li>
+																<li><a href="#">Trousers</a></li>
+																<li><a href="#">Shoes</a></li>
+																<li><a href="#">Sale</a></li>
+															</ul>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</li>
+										<li>
+											<a class="icon icon-diamond" href="#">Jewelry</a>
+										</li>
+										<li>
+											<a class="icon icon-music" href="#">Music</a>
+										</li>
+										<li>
+											<a class="icon icon-food" href="#">Grocery</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li><a class="icon icon-photo" href="#">Miscellaneous</a></li>
+							<li><a class="icon icon-wallet" href="#">Credits</a></li>
+						</ul>
+							
+					</div>
+				</nav>
+				<!-- /mp-menu -->
+
+				<div class="scroller"><!-- this is for emulating position fixed of the nav -->
+					<div class="scroller-inner">
+						
+						<div class="content clearfix">
+							<div class="block block-40 clearfix">
+                                
+                                
+                                
+                                
+                                
+								<p><a href="#" id="trigger" class="menu-trigger">Categories</a></p>
+                                <br />
+                                
+							</div>
+							
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                
+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+			
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+						</div>
+					</div><!-- /scroller-inner -->
+				</div><!-- /scroller -->
+
+			</div><!-- /pusher -->
+
+		</div><!-- /container -->
+		<script src="{{=URL('static','js/categoriesmenu/classie.js')}}"></script>
+		<script src="{{=URL('static','js/categoriesmenu/mlpushmenu.js')}}"></script>
+		<script>
+			new mlPushMenu( document.getElementById( 'mp-menu' ), document.getElementById( 'trigger' ) );
+		</script>
+	</body>
+</html>

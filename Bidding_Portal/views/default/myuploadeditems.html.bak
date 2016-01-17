@@ -1,0 +1,49 @@
+{{extend 'layout2.html'}}
+
+<h1 align="center">
+    My uploaded items
+</h1>
+<table class="table" style="width:100%">
+    <tr>
+        <td><h3>Product Name</h3></td>
+        <td><h3>Status</h3></td>
+    </tr>
+    {{for row in rows:}}
+
+    <tr>
+        <td><h5>
+            <a href="{{=URL('productpage',args=row.id)}}">{{=row.product_name}}</a></h5></td>
+        <td>
+            {{if row.status == 'Live' :}}<h4 style="color: darkgreen">Live</h4>{{pass}}
+            {{if row.status == 'Expired' :}}<h4 style="color: red">Expired</h4>{{pass}}
+            {{if row.status == 'Withdrawn' :}}<h4 style="color: orange">Withdrawn</h4>{{pass}}
+        </td>
+    </tr>
+
+    {{pass}}
+</table>
+
+
+
+<h1 align="center">
+    Items I am bidding on
+</h1>
+<table class="table" style="width:100%">
+    <tr>
+        <td><h3>Product Name</h3></td>
+        <td><h3>Status</h3></td>
+    </tr>
+    {{for temp in rows2:}}
+    <tr>
+        {{row=db(db.product_list.id == temp.prod_id).select()[0]}}
+        <td><h5>
+            <a href="{{=URL('productpage',args=row.id)}}">{{=row.product_name}}</a></h5></td>
+        <td>
+            {{if row.status == 'Live' :}}<h4 style="color: darkgreen">Live</h4>{{pass}}
+            {{if row.status == 'Expired' :}}<h4 style="color: red">Expired{{if row.current_highest_bidder==auth.user.id:}} ( Won ){{pass}}</h4>{{pass}}
+            {{if row.status == 'Withdrawn' :}}<h4 style="color: orange">Withdrawn</h4>{{pass}}
+        </td>
+    </tr>
+
+    {{pass}}
+</table>

@@ -1,0 +1,392 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+
+\title{ \Huge IIIT BIDDING PORTAL}
+
+\date{ May 05 2015}
+
+\begin{document}
+
+\maketitle
+
+\center { COMPLETE  DOCUMENTATION, $1^{st}$ EDITION }
+
+\large 
+
+\begin{center}
+
+\textsc{ $WEB2PY^{TM} $}
+\end{center}
+
+\normalsize
+
+\begin{center}
+Developed by \\
+\end{center}
+
+\begin{center}
+
+Deepanshu Jain \\ 
+\end{center}
+
+\begin{center}
+
+Punyaslok Pattnaik \\ 
+\end{center}
+
+\begin{center}
+
+Team Name: NameError \newpage
+ 
+\end{center}
+
+\flushleft
+
+\tableofcontents \hfill
+
+\section{Introduction}
+\subsection{Need}
+\subsection{Rules of the Portal}
+
+\section{Database Model}
+\subsection{Database Schema}
+\subsection{User Database}
+\subsection{Product Database}
+\subsection{Event Database}
+\subsection{Scheduler Database}
+
+\section{User Interface}
+\subsection{Navigation Button}
+\subsection{Category Button}
+\subsection{Live Search Bar}
+
+\section{Features Implemented}
+
+\section{Current Bugs}
+
+\section{Future Extentions}
+\subsection{Integration with IIIT CAS}
+\subsection{Mobile Compatibility}
+\subsection{Tracking Feature}
+\subsection{Tags}
+\subsection{Sorting Items}
+\subsection{Support for bidding on multiple($>$1) quantities of the same product}
+\subsection{UI Refinement}
+
+\section{WEB2PY Features Used}
+\subsection{DAL}
+\subsection{Ajax}
+\subsection{Sending Email}
+\subsection{WEB2PY's Event Scheduler} \newpage
+
+
+\flushleft
+\vspace{15pt}
+\huge{\textbf{1 \\ Introduction }} \vspace{12pt}\\
+
+\normalsize 
+\setlength{\parindent}{15pt} 
+The IIIT Bidding Portal is a free platform for everyone in the IIIT Family to conveniently auction their items. It is only available inside the IIIT Intranet Network. \\
+\flushleft 
+\large {\textbf {1.1  Need} } \vspace{5pt}
+
+\hspace{15pt} \normalsize This portal provides an easy and simplistic \emph{User Interface} for people who want to get their auctions done without much hassle. This is especiallly helpful for graduating students to auction off some of their belongings and the new students can get these at a lower price. \vspace{10pt}
+
+\large {\textbf {1.2 Rules of the Portal} } \\ \vspace{5pt}
+
+\begin{enumerate}
+ \item The bid ending time once set by a user cannot be changed.
+ \item The starting price once set by a user cannot be changed.
+ \item User cannot bid on his/her product.
+ \item Bids, once placed cannot be withdrawn.
+\end{enumerate}
+
+
+\huge{\textbf{2 \\ Database Model}} \vspace{12pt}
+
+\normalsize
+
+\large{\textbf{2.1 Database Schema}}\\ \vspace{5pt} 
+\hspace{15pt} The database consist of 3 tables for the app to funciton as the portal doesn't cater to a huge number of users.
+
+\large{\textbf{2.2 User Database}} \\  \vspace{5pt}
+
+\hspace{15pt} Stores details of every user. \newline
+\textbf{Fields:}
+
+\begin{itemize}
+ \item ID
+ \item First Name
+ \item Last Name
+ \item Email
+ \item Password (hashed)
+\end{itemize}
+
+
+\large{\textbf{2.3 Product Database}} \\ \vspace{5pt}
+
+\hspace{15pt} Stores details of every product. \newline \newline
+\textbf{Fields:}
+
+\begin{itemize}
+ \item ID
+ \item Product Name
+ \item Description
+ \item Starting Price
+ \item Bidding End Date
+ \item Image Fields
+ \item Current Highest Bidder
+ \item Current Highest Bid
+ \item Last Bid Time
+ \item Bid Count
+ \item Status (Live or Expired)
+ \item Category Hierarchy 
+ \item Owner
+\end{itemize}
+
+
+\large{\textbf{2.4 Event Database}} \\ \vspace{5pt}
+
+\hspace{15pt} Stores the list of products each user has bid on. This is required for displaying these items separately for the user's convenience. \\ \vspace{10pt}
+
+\large{\textbf{2.5 Scheduler Database}} \\ \vspace{5pt}
+
+\hspace{15pt} Stores the tasks which the Scheduler has to run. This is the default scheduler\texttt{\_}task table that web2py uses to run scheduled tasks. The automated checking every 60 seconds is a task in this database. \newpage
+
+
+\huge{\textbf{3 \\ User Interface}} \vspace{12pt}
+
+\hspace{15pt}\normalsize This portal provides a real space time platform where people can view, buy and sell items.\\ \vspace{5pt}
+\large{\textbf{3.1 Navigation Button}} \vspace{5pt}
+
+\normalsize \textsl {Navigation Button is placed at the center and towards the top of the page. On clicking this button links appear which connects to the most important sections of the site. These include the following pages:} \\ \vspace{5pt}
+
+\hspace{15pt} All Users are initially taken to the login page to prevent outsiders from viewing the bidding activities in IIIT. \\
+
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=110mm, height=100mm ]{/home/deepanshu/latex/zz/1.png}
+\caption{Navigation Button \label{overflow}}
+\end{figure}
+
+
+
+\begin{itemize}
+ \item {Home} : This link takes you to the homepage of the portal. \\
+
+\item Sell : This link takes you to a page from where you can put any item for auction. \\
+
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=110mm, height=100mm ]{/home/deepanshu/latex/zz/2.png}
+\caption{Upload Form \label{overflow}}
+\end{figure} \newpage
+
+
+
+
+\item My Items : This link takes you to a page where you can view the items that you put up for auction as well as the items you are currently bidding or have bid on. ( tracking feature ) \\
+
+\item Manage : This link takes you to a page where you can edit your product details. Note that some product details cannot be changed after the product goes live according to the portal rules.\\
+
+\item Profile : This link takes you to a page where you can change your profile details. \\
+
+\item Password : The name says it all.
+
+\item Logout : Well, you logout !! \\ \vspace{5pt}
+\end{itemize}
+
+\large{{\textbf{3.2 Category Button}} \vspace{5pt}
+
+\normalsize \textsl {This Button is fixed at the left side of the page. Clicking this button unleashes a Muti-Level Push-Menu which displays all the categories (and the subcategories upon clicking a category). }\\
+categories: \\
+
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=110mm, height=100mm ]{/home/deepanshu/latex/zz/4.png}
+\caption{Categories Menu \label{overflow}}
+\end{figure} 
+
+
+
+
+
+\begin{itemize}
+\item 
+Devices
+    \begin{itemize}
+\item Mobile Phones
+	  \begin{itemize}
+	  \item Super Smart Phones
+	  \item Thin Magic Mobiles
+	  \item Performance Crusher
+	  \end{itemize}
+\item  Computers
+	  \begin{itemize}
+	  \item Laptops
+	  \item PCs
+	  \item Laptop Accesories
+	  \item PC Accesories
+	  \end{itemize}
+\item  Cameras
+	  \begin{itemize}
+	  \item DSLR
+	  \item Power Shooter
+	  \item Easy Photo Maker
+	  \end{itemize}
+      \end{itemize}
+\item  
+Books
+      \begin{itemize}
+\item      Fiction
+\item      Science and Technology
+\item      Humor
+\item      Travel
+\item      Reference Books
+      \end{itemize}
+\item
+Clothing
+      \begin{itemize}
+\item      Clothes
+	    \begin{itemize}
+\item	  Women's Clothing
+	      \begin{itemize}
+\item	      Tops
+\item	      Dresses
+\item	      Trousers
+\item	      Shoes
+	      \end{itemize}
+\item	  Men's Clothing
+	      \begin{itemize}
+\item	      Shirts
+\item	      Trousers
+\item	      Shoes
+	      \end{itemize}
+	  \end{itemize}
+      \end{itemize}
+\item
+Jewelry
+\item
+Music
+\item
+Miscellaneous 
+\end{itemize}
+
+\large{{\textbf{3.3 Live Search Bar: }} \vspace{5pt}
+
+\normalsize \textsl {Dynamically displays product links which match the current input.} \\
+
+\vspace{5pt}
+
+\huge{\textbf{4 \\ Features Implemented}} \vspace{12pt}
+
+\normalsize
+
+\begin{enumerate}
+\item 
+\textit{Bidding}: User can place a bid on a product provided it's status is Live. The user can bid any amount above the currently highest bid. If there is no bid yet on the product, then the first bid must be greater than the base price set by the seller. The bidding process is dynamic, instantly updating the database and changing the corresponding bid value to all the uses who are viewing the product. \\
+
+\item 
+\textit{Live Information Display}: All the bidding related information are constantly updated so that any change is reflected immediately to the user. \\
+
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=110mm, height=100mm ]{/home/deepanshu/latex/zz/3.png}
+\caption{Live Details \label{overflow}}
+\end{figure}
+
+
+
+\item 
+\textit{My Items}: Information about the items the user is involved in are displayed so that the user can access them conveniently. \\
+
+\item 
+\textit{Automated Status Update}: Whenever a product's time is up, the status in the database automatically changes from 'Live' to 'Expired' due to a background task which constantly moniters the product status. \\ 
+
+\item 
+\textit{Automatic Notification}: Whenever a product's status changes from 'Live' to 'Expired', if there is a winner, then he/she gets an email notification immediately. \\
+
+\item 
+\textit{Conditional Display of Form fields in Sell Page}: Certain fields are displayed only if their pre-requisite fields have a valid value. This is done to prevent bogus inputs.
+
+\item 
+\textit{Separate Countdown Timer for all Products}: These live timers make life easy for the user by showing the time left. \\
+
+\item 
+\textit{Product Suggestions}: On each product's page similar products are displayed sorted according to their price. \\
+
+\item
+\textit{Live Search Bar}: Dynamically displays product suggestions as the input text changes. \\
+\end{enumerate}
+
+
+\huge{\textbf{5 \\ Current Bugs}} \vspace{12pt}
+
+\normalsize
+
+\begin{itemize}
+ \item Search Bar fails sometimes when used on a product's description page.
+ \item Currently, in the automated mail sending feature, a mail is not sent to the winner if the mail sending process times out. This can be fixed by using a queue in which all timed out mails are stored and the process of resending those mails is done from this queue.
+\end{itemize}
+
+ 
+\huge{\textbf{6 \\ Future Extentions}} \vspace{12pt}
+
+\normalsize
+\begin{enumerate}
+
+\item
+\textbf{Integration with IIIT CAS:} This feature will increase the convenience to users with a working IIIT Mail ID. It will ensure that the users who are logged into CAS don't have to login to the Bidding Portal.
+\item
+\textbf{Mobile Compatibility:} 
+\begin{enumerate}
+\item Rearrange the Database Structure so as to optimize the app for use in mobile devices. This will include storing only relevant data in the device's cache for faster retrieval.
+\item Include Bootstrapping in the app so that proper layout maintained on mobile displays of different resolutions.
+\item Use the Mobile Device's inbuilt Calender/Scheduler to keep track of events which cannot be modified according to the portal rules such as Bid Ending Date. This will provide notifications even when mobile data is disabled and will also enhance the experience on low bandwidth connections.
+\end{enumerate}
+
+\item
+\textbf{Tracking Feature:} If a user is really interested in a product, he/she can track it. This feature, when activated for a product by user, will send a notification to the user whenever someone bids higher than the user.
+\item
+\textbf{Tags}: Every item can be assigned a tag by the user so that the search becomes more accurate. The Search Bar can be modified to include searching for items associated with particular tag(s). For Example: a new bicycle will have \emph{'new' , 'bicycle', 'bicycles'} and \emph{'two wheeler'} tags associated with it. So a user searches for two wheelers, then the bicycle will be shown among the results. 
+\item
+\textbf{Sorting Items:} Add ``Sort By'' functionality to the search results.
+\item
+\textbf{Support for bidding on multiple($>$1) quantities of the same product:} If a user puts up multiple quantities of the same product up for bidding then the items get auctioned off sequentially one after the other, i.e. after the bidding is completed on one item, bidding on the next one begins.
+\item
+\textbf{UI Refinement:} Make the UI faster and even more user-friendly.
+
+\end{enumerate}
+
+\huge{\textbf{7 \\ WEB2PY Features Used }} \\ \vspace{12pt}
+
+\normalsize
+
+\large {\textbf{7.1 DAL }} \\ \vspace{10pt}
+
+\hspace{15pt} Sqlite database has been used to store data. The table used are:
+\begin{enumerate}
+ \item Product List: Stores all the data related to each product.
+ \item User List: Stores the list of all users.
+ \item User History: Stores the list of products each user has bid on. \\ \vspace{5pt}
+\end{enumerate}
+
+
+\large {\textbf{7.2 Ajax }} \\ \vspace{10pt}
+\hspace{15pt} Periodic function calls are generated to refresh the bidding information on the product page without refreshing the whole page. In the Search Bar, a function is called everytime the contents change and the function returns the suggested value. \\ \vspace{5pt}
+
+\large {\textbf{7.3 Sending Email}} \\ \vspace{10pt}
+\hspace{15pt} Emails are sent using this inbuilt feature of web2py. \\ \vspace{5pt}
+
+\large {\textbf{7.4 WEB2PY's Event Scheduler }} \\ \vspace{10pt} 
+
+\hspace{15pt} Once the server starts running, the event scheduler performs a task which calls a function every 60 seconds. The funcion checks and updates the status of each product and sends any emails, if required. This is how the automated notification feature works. \\ \vspace{5pt} \newpage
+
+
+\end{document}

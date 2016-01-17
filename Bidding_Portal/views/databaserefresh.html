@@ -1,0 +1,5 @@
+{{extend 'layout2.html'}}
+
+{{ for row in rows : }}
+{{=(row.end_date_time-request.now)}}
+{{pass}}

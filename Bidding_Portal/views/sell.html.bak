@@ -1,0 +1,5 @@
+{{extend 'layout.html'}}
+<h1>
+    Sell an item.
+</h1>
+{{=form}}

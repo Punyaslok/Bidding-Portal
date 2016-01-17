@@ -1,0 +1,248 @@
+{{extend 'layout2.html'}}
+{{import datetime}}
+{{for oneproduct in product:}}
+<div class="slider"> 
+{{if len(oneproduct.image_no_1)==0 and len(oneproduct.image_no_2)==0 and len(oneproduct.image_no_3)==0 and len(oneproduct.image_no_4)==0 and len(oneproduct.image_no_5)==0:}}
+    <input type="radio" id="control1" name="controls" checked="checked"/>
+        <label for="control1"></label>
+        
+     <div class="sliderinner" style="text-align: center">
+            <ul>
+                <li>
+                    <img src="{{=URL('static/images','No_image_available.jpg')}}" />
+                </li>
+            </ul>
+        </div>
+    
+    
+    {{else:}}
+    
+        {{if len(oneproduct.image_no_1)!=0:}}
+        <input type="radio" id="control1" name="controls" checked="checked"/>
+        <label for="control1"></label>
+        
+        {{pass}}
+        
+        {{if len(oneproduct.image_no_2)!=0:}}
+           <input type="radio" id="control2" name="controls"/>
+        <label for="control2"></label>
+        {{pass}}
+        {{if len(oneproduct.image_no_3)!=0:}}
+            <input type="radio" id="control3" name="controls"/>
+        <label for="control3"></label>
+        {{pass}}
+        {{if len(oneproduct.image_no_4)!=0:}}
+           <input type="radio" id="control4" name="controls"/>
+        <label for="control4"></label>
+        {{pass}}
+        {{if len(oneproduct.image_no_5)!=0:}}
+            <input type="radio" id="control5" name="controls"/>
+        <label for="control5"></label>
+        {{pass}}
+    {{pass}}
+        
+        <div class="sliderinner" style="text-align: center">
+            <ul>
+                {{if len(oneproduct.image_no_1)!=0:}}
+                <li>
+                   <img src="{{=URL('download',args=oneproduct.image_no_1)}}" />
+
+                </li>
+                 {{pass}}
+                {{if len(oneproduct.image_no_2)!=0:}}
+                <li>
+                   <img src="{{=URL('download',args=oneproduct.image_no_2)}}" />
+
+                </li>
+                 {{pass}}
+                {{if len(oneproduct.image_no_3)!=0:}}
+                <li>
+                   <img src="{{=URL('download',args=oneproduct.image_no_3)}}" />
+
+                </li>
+                 {{pass}}
+                {{if len(oneproduct.image_no_4)!=0:}}
+                <li>
+                   <img src="{{=URL('download',args=oneproduct.image_no_4)}}" />
+
+                </li>
+                 {{pass}}
+                {{if len(oneproduct.image_no_5)!=0:}}
+                <li>
+                   <img src="{{=URL('download',args=oneproduct.image_no_5)}}" />
+
+                </li>
+                 {{pass}}
+            </ul>
+        </div>
+    </div><!--slider-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+                
+    
+    
+    <br /><br />
+<table style="width:80%">
+    <tr>
+        <td colspan="2"><h2>{{=oneproduct.product_name}}</h2></td>
+    </tr>
+    <tr>
+        <td><h3>
+            Seller : {{=oneproduct.created_by.first_name}} {{=oneproduct.created_by.last_name}}<br>
+            Email : {{=oneproduct.created_by.email}}
+            </h3></td>
+    </tr>
+    <tr>
+        <td colspan="2"><h4>
+            Description:
+            </h4>
+            <p>
+            {{=oneproduct.description}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h4>
+            Starting Price : ₹ {{=oneproduct.starting_price}}
+            </h4>
+        </td>
+        <td>
+            <h4>
+            Bid Ending Date :  {{=oneproduct.end_date_time.strftime('%d-%m-%Y %H:%M')}} IST
+            </h4>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align: center">
+            <h4>
+                
+                
+                <script>
+var end = new Date('{{=oneproduct.end_date_time.strftime('%m/%d/%Y %H:%M')}}');
+
+    var _second = 1000;
+    var _minute = _second * 60;
+    var _hour = _minute * 60;
+    var _day = _hour * 24;
+    var timer;
+
+    function showRemaining() {
+        var now = new Date();
+        var distance = end - now;
+        if (distance < 0) {
+
+            clearInterval(timer);
+            document.getElementById('countdown').innerHTML = 'EXPIRED!';
+
+            return;
+        }
+        var days = Math.floor(distance / _day);
+        var hours = Math.floor((distance % _day) / _hour);
+        var minutes = Math.floor((distance % _hour) / _minute);
+        var seconds = Math.floor((distance % _minute) / _second);
+
+        document.getElementById('countdown').innerHTML = days + ' days ';
+        document.getElementById('countdown').innerHTML += hours + ' hrs ';
+        document.getElementById('countdown').innerHTML += minutes + ' mins ';
+        document.getElementById('countdown').innerHTML += seconds + ' secs';
+    }
+
+    timer = setInterval(showRemaining, 1000);
+</script>
+
+                
+                
+                
+                <div style="background-color: #0e2f44;">Time left : <div id="countdown"></div></div>
+            </h4>
+        </td>
+    </tr>
+    <tr>
+        {{if oneproduct.current_highest_bidder == 'none' :}}
+        <td><h4>
+            No bids yet....
+            </h4></td>
+        {{pass}}
+       {{if oneproduct.current_highest_bidder != 'none' :}}
+        <tr>
+        <td colspan="2" style="text-align: center">
+            <h3>
+                {{=oneproduct.bid_count}} bids
+            </h3>
+        </td>
+    </tr>
+        <td>
+            {{name = db(db.auth_user.id==oneproduct.current_highest_bidder).select()}}
+            {{name2=name[0]}}
+            {{prod_id=oneproduct.id}}
+            <h3 style="color: lightblue">
+                Highest Bidder : {{=LOAD('single_auto_refresh','ref_func_name_details.load',args=[prod_id],ajax=True,timeout=5000, times="infinity")}}
+            </h3>
+        </td>
+        <td>
+            <h3 style="color: lightblue">
+                
+                Highest Bid : {{=LOAD('single_auto_refresh','ref_func_bid_value.load',args=[prod_id],ajax=True,timeout=5000, times="infinity")}}
+            </h3>
+        </td>
+        {{pass}}
+            
+    </tr>
+{{pass}}
+    </table>
+<br />
+
+{{if (oneproduct.created_by != auth.user.id) and (oneproduct.status == 'Live') :}}
+  {{=form2}}
+{{pass}}
+
+<h3 style="color: lightblue">
+    * Bidding details refreshing every 5 seconds. *
+</h3>
+
+
+
+
+
+{{ xy = 0 }}
+<h2 align="center">
+    Similar Products
+</h2>
+<table class="table" style="width:100%">
+    <tr>
+        <td><h3>Product Name</h3></td>
+        <td><h3>Bidding End date</h3></td>
+        <td><h3>Starting Price</h3></td>
+        <td><h3>Highest Bid</h3></td>
+    </tr>
+    {{for row in rows:}}
+    {{if row.category == oneproduct.category and row.id != oneproduct.id and row.status == 'Live': }}
+    {{ xy = xy + 1}}
+    <tr>
+        <td><h5>
+            <a href="{{=URL('productpage',args=row.id)}}">{{=row.product_name}}</a></h5></td>
+        <td>{{=row.end_date_time}}</td>
+        <td>{{=row.starting_price}}</td>
+        <td>{{if row.current_highest_bid == -1 :}}No bids yet{{else:}}{{=row.current_highest_bid}}{{pass}}</td>
+    </tr>
+    {{pass}}
+    {{ if xy > 5 :}}
+    {{break}}
+    {{pass}}
+    {{pass}}
+</table>

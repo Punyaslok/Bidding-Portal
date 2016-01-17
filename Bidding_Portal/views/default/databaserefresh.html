@@ -1,0 +1,12 @@
+{{extend 'layout.html'}}
+
+{{ for row in rows : }}
+<p>{{=(row.end_date_time-request.now)}}{{if row.end_date_time < request.now :}}  Expired !!! {{pass}}</p><p>
+{{=row.created_by}}
+</p>
+{{if row.current_highest_bidder != 'none' :}}
+                 {{rec_email = db(db.auth_user.id == row.current_highest_bidder).select()[0].email}}
+{{=rec_email}}
+{{pass}}
+<br /><br />
+{{pass}}
