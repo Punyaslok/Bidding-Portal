@@ -4,7 +4,6 @@ Team Name : NameError
 
 Deployment Link : punyaslokpattnaik.pythonanywhere.com/Bidding_Portal
 
-** The website stays live for 24 hours. Last deployed on 01:30 hrs IST, 5th May. So, the link should expire on 01:30 hrs IST, 6th May **
 
 Existing Users:
 
