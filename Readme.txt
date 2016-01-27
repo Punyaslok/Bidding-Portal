@@ -1,4 +1,5 @@
 IIIT Bidding Portal
+International Institute of Information Technology, Hyderabad
 
 
 A bidding portal targeted mainly at college students looking to buy/sell their stuff to other students within the college. Especially helps graduating students sell some of their belongings like bicycles before leaving.
