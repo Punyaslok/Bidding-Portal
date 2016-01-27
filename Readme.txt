@@ -1,14 +1,17 @@
 IIIT Bidding Portal
-Team Name : NameError
 
+
+A bidding portal targeted mainly at college students looking to buy/sell their stuff to other students within the college. Especially helps graduating students sell some of their belongings like bicycles before leaving.
+
+Platform : web2py
+
+Features :
+    1.  Real-time updates on each page about current bidding price.
+    2.  Timed bidding, i.e. bidding shuts down automatically after deadline expires.
+    3.  After bidding closes, a computer generated e-mail is sent automatically to the winning bidder.
 
 Deployment Link : punyaslokpattnaik.pythonanywhere.com/Bidding_Portal
 
-** The website stays live for 24 hours. Last deployed on 01:30 hrs IST, 5th May. So, the link should expire on 01:30 hrs IST, 6th May **
-
-Existing Users:
-
-1. xyz@gmail.com Password:password
 
 
 BUG 1 : Live Search Bar fails to work properly on an individual product's page. Works fine on home and sell pages.
